@@ -40,40 +40,20 @@
         };
 
         var companies = [
-            { name: "Nareva Holding", lat: 35.82209171321889, lon: -5.49836639310943, category: "Approvisionnement en énergie" },
-            { name: "Nareva Holding", lat: 33.5731, lon: -7.5898, category: "Approvisionnement en énergie" },
-            { name: "Nareva Holding", lat: 33.5731, lon: -7.5898, category: "Approvisionnement en énergie" },
-            { name: "Nareva Holding", lat: 33.5731, lon: -7.5898, category: "Approvisionnement en énergie" },
-            { name: "Acwa Power", lat: 34.020882, lon: -6.84165, category: "Approvisionnement en énergie" },
-            { name: "EDF", lat: 48.8566, lon: 2.3522, category: "Approvisionnement en énergie" },
-            { name: "Taqa Morocco", lat: 32.2565, lon: -8.5088, category: "Approvisionnement en énergie" },
-            { name: "Engie", lat: 33.5731, lon: -7.5898, category: "Approvisionnement en énergie" },
-            { name: "TotalEnergies", lat: 48.8566, lon: 2.3522, category: "Approvisionnement en énergie" },
-            { name: "Enel Green Power", lat: 41.9028, lon: 12.4964, category: "Approvisionnement en énergie" },
-            { name: "Gaia Energy", lat: 34.020882, lon: -6.84165, category: "Approvisionnement en énergie" },
-            { name: "CWP Global", lat: 25.276987, lon: 55.296249, category: "Production d'hydrogène" },
-            { name: "INNOVX", lat: 31.5731, lon: -7.5898, category: "Production d'hydrogène" },
-            { name: "SOMAS", lat: 33.6835, lon: -7.3849, category: "Compression et stockage" },
-            { name: "ONHYM", lat: 34.020882, lon: -6.84165, category: "Compression et stockage" },
-            { name: "Afriquia Gaz", lat: 33.5731, lon: -7.5898, category: "Distribution et transport" },
-            { name: "TotalEnergies Morocco", lat: 33.5731, lon: -7.5898, category: "Distribution et transport" },
-            { name: "OCP Group", lat: 33.5731, lon: -7.5898, category: "Applications" },
-            { name: "Air Liquide Morocco", lat: 33.5731, lon: -7.5898, category: "Fourniture de CO2" },
-            { name: "Veolia", lat: 48.8566, lon: 2.3522, category: "Traitement de l'eau" },
-            { name: "Maghreb Oxygène", lat: 33.5731, lon: -7.5898, category: "Sous-produits" },
-            { name: "Engie", lat: 33.5731, lon: -7.5898, category: "Ingénierie et intégration" },
-            { name: "Worley", lat: 33.5731, lon: -7.5898, category: "Construction" }
+            { name: "Nareva Holding", lat: 33.587785718048636, lon: -7.632916026291155, categories: ["Approvisionnement en énergie", "Production d'hydrogène"], title: "Headquarter" },
+        
         ];
 
         companies.forEach(function(company) {
-            var color = categories[company.category] || "gray";
+            var color = company.categories.map(cat => categories[cat] || "gray").join(", ");
+            var categoryText = company.categories.join(", ");
             var marker = L.circleMarker([company.lat, company.lon], {
-                color: color,
+                color: categories[company.categories[0]] || "gray",
                 radius: 8,
                 fillOpacity: 0.8
             }).addTo(map);
             
-            marker.bindPopup("<b>" + company.name + "</b><br>" + company.category);
+            marker.bindPopup("<b>" + company.name + "</b><br>" + categoryText + "<br><i>" + company.title + "</i>");
         });
     </script>
 </body>
