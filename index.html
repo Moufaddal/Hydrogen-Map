@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Value Chain in Morocco</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+    <style>
+        #map { height: 600px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Hydrogen Value Chain in Morocco</h2>
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([31.7917, -7.0926], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var categories = {
+            "Approvisionnement en énergie": "blue",
+            "Production d'hydrogène": "red",
+            "Compression et stockage": "green",
+            "Distribution et transport": "purple",
+            "Applications": "orange",
+            "Fourniture de CO2": "cyan",
+            "Traitement de l'eau": "brown",
+            "Sous-produits": "pink",
+            "Ingénierie et intégration": "yellow",
+            "Construction": "black"
+        };
+
+        var companies = [
+            { name: "Nareva Holding", lat: 33.5731, lon: -7.5898, category: "Approvisionnement en énergie" },
+            { name: "Acwa Power", lat: 34.020882, lon: -6.84165, category: "Approvisionnement en énergie" },
+            { name: "EDF", lat: 48.8566, lon: 2.3522, category: "Approvisionnement en énergie" },
+            { name: "Taqa Morocco", lat: 33.2565, lon: -8.5088, category: "Approvisionnement en énergie" },
+            { name: "Engie", lat: 33.5731, lon: -7.5898, category: "Approvisionnement en énergie" },
+            { name: "TotalEnergies", lat: 48.8566, lon: 2.3522, category: "Approvisionnement en énergie" },
+            { name: "Enel Green Power", lat: 41.9028, lon: 12.4964, category: "Approvisionnement en énergie" },
+            { name: "Gaia Energy", lat: 34.020882, lon: -6.84165, category: "Approvisionnement en énergie" },
+            { name: "CWP Global", lat: 25.276987, lon: 55.296249, category: "Production d'hydrogène" },
+            { name: "INNOVX", lat: 33.5731, lon: -7.5898, category: "Production d'hydrogène" },
+            { name: "SOMAS", lat: 33.6835, lon: -7.3849, category: "Compression et stockage" },
+            { name: "ONHYM", lat: 34.020882, lon: -6.84165, category: "Compression et stockage" },
+            { name: "Afriquia Gaz", lat: 33.5731, lon: -7.5898, category: "Distribution et transport" },
+            { name: "TotalEnergies Morocco", lat: 33.5731, lon: -7.5898, category: "Distribution et transport" },
+            { name: "OCP Group", lat: 33.5731, lon: -7.5898, category: "Applications" },
+            { name: "Air Liquide Morocco", lat: 33.5731, lon: -7.5898, category: "Fourniture de CO2" },
+            { name: "Veolia", lat: 48.8566, lon: 2.3522, category: "Traitement de l'eau" },
+            { name: "Maghreb Oxygène", lat: 33.5731, lon: -7.5898, category: "Sous-produits" },
+            { name: "Engie", lat: 33.5731, lon: -7.5898, category: "Ingénierie et intégration" },
+            { name: "Worley", lat: 33.5731, lon: -7.5898, category: "Construction" }
+        ];
+
+        companies.forEach(function(company) {
+            var color = categories[company.category] || "gray";
+            var marker = L.circleMarker([company.lat, company.lon], {
+                color: color,
+                radius: 8,
+                fillOpacity: 0.8
+            }).addTo(map);
+            
+            marker.bindPopup("<b>" + company.name + "</b><br>" + company.category);
+        });
+    </script>
+</body>
+</html>
