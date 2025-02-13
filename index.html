@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrogen Projects in Morocco</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+    <style>
+        #map { height: 600px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Hydrogen Projects in Morocco</h2>
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Step 1: Create the map
+        var map = L.map('map').setView([31.7917, -7.0926], 6); // Centered on Morocco
+
+        // Step 2: Add a tile layer (background map)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Step 3: Add markers for hydrogen projects
+        var projects = [
+            { name: "Green H2 Plant Tangier", lat: 35.7595, lon: -5.8339, type: "Electrolysis", company: "Company A" },
+            { name: "Hydrogen Storage Agadir", lat: 30.4278, lon: -9.5981, type: "Storage", company: "Company B" },
+            { name: "H2 Refueling Casablanca", lat: 33.5731, lon: -7.5898, type: "Distribution", company: "Company C" }
+        ];
+
+        projects.forEach(function(project) {
+            L.marker([project.lat, project.lon]).addTo(map)
+                .bindPopup("<b>" + project.name + "</b><br>" + project.type + "<br>Company: " + project.company);
+        });
+
+    </script>
+
+</body>
+</html>
